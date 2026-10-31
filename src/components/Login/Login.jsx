@@ -4,7 +4,7 @@ import { iconClass, inputBase } from '../../assets/dummydata'
 import {Link} from 'react-router-dom';
 import axios from 'axios'
 
-const url = 'http://localhost:4000'
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Login = ({onLoginSuccess, onClose}) => {
 
@@ -20,7 +20,7 @@ const Login = ({onLoginSuccess, onClose}) => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${url}/api/user/login`, {
+      const res = await axios.post(`${API_URL}/api/user/login`, {
         email: formData.email,
         password: formData.password,
       })

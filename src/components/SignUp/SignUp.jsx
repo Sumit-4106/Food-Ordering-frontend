@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 
-const url = 'http://localhost:4000'
+const API_URL = import.meta.env.VITE_API_URL;
+
+//const url = 'http://localhost:4000'
 
 const AwesomeToast = ({ message, icon }) => (
     <div className=' animate-slide-in fixed bottom-6 right-6 flex items-center bg-gradient-to-br from-amber-500 to-amber-600 px-6 py-4
@@ -40,7 +42,7 @@ const SignUp = () => {
       e.preventDefault();
       console.log('Sign up fired: ', formData)
       try {
-        const res = await axios.post(`${url}/api/user/register`, formData)
+        const res = await axios.post(`${API_URL}/api/user/register`, formData)
         console.log('Register Response: ', res.data)
 
         if(res.data.success && res.data.token) {

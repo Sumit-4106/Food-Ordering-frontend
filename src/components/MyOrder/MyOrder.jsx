@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { FiArrowLeft, FiBox, FiCheckCircle, FiClock, FiMapPin, FiTruck, FiUser } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const MyOrder = () => {
 
     const [orders, setOrders] = useState([]);
@@ -14,7 +16,7 @@ const MyOrder = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/orders', {
+                const response = await axios.get(`${API_URL}/api/orders`, {
                     params: {email: user?.email},
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
@@ -202,7 +204,7 @@ const getPaymentMethodDetails = (method) => {
                                                 {order.items.map((item, index) => (
                                                     <div key={`${order._id}-${index}`} className='flex items-center gap-3 p-2 
                                                     bg-[#3a2b2b]/50 rounded-lg'>
-                                                        <img src={`http://localhost:4000${item.item.imageUrl}`} alt={item.item.name} 
+                                                        <img src={`${API_URL}${item.item.imageUrl}`} alt={item.item.name} 
                                                         className='w-10 h-10 object-cover rounded-lg' />
 
                                                         <div className='flex-1'>

@@ -3,6 +3,8 @@ import { useCart } from '../../CartContext/CartContext'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const VerifyPaymentPage = () => {
 
   const {clearCart} = useCart();
@@ -28,7 +30,7 @@ const VerifyPaymentPage = () => {
     }
 
     //STRIPE SUCCESS = TRUE
-    axios.get('http://localhost:4000/api/orders/confirm', {
+    axios.get(`${API_URL}/api/orders/confirm`, {
       params: { session_id },
       headers: authHeaders
     })

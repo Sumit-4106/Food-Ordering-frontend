@@ -4,6 +4,8 @@ import { FaArrowLeft, FaLock } from 'react-icons/fa'
 import { useCart } from '../../CartContext/CartContext'
 import axios from 'axios'
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Checkout = () => {
 
   const { totalAmount, cartItems, clearCart } = useCart();
@@ -30,7 +32,7 @@ const Checkout = () => {
         setLoading(true);
 
         if(paymentStatus === 'success' && sessionId) {
-          axios.post('http://localhost:4000/api/orders/confirm',
+          axios.post(`${API_URL}/api/orders/confirm`,
             {sessionId},
             {headers: authHeaders})
             .then(({ data }) => {
@@ -80,7 +82,7 @@ const Checkout = () => {
     try {
       if(formData.paymentMethod === 'online') {
         const { data } = await axios.post(
-          'http://localhost:4000/api/orders',
+          `${API_URL}/api/orders`,
           payload,
           {headers: authHeaders}
         );
@@ -90,7 +92,7 @@ const Checkout = () => {
         {
         //COD
         const { data } = await axios.post(
-          'http://localhost:4000/api/orders',
+          `${API_URL}/api/orders`,
           payload,
           {headers: authHeaders}
         )
