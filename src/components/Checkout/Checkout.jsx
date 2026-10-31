@@ -32,13 +32,14 @@ const Checkout = () => {
         setLoading(true);
 
         if(paymentStatus === 'success' && sessionId) {
-          axios.post(`${API_URL}/api/orders/confirm`,
-            {sessionId},
-            {headers: authHeaders})
-            .then(({ data }) => {
-              clearCart();
-              navigate('/myorder', { state: { order: data.order } })
-            })
+          axios.get(`${API_URL}/api/orders/confirm`, {
+  params: { session_id: sessionId },
+  headers: authHeaders
+})
+.then(({ data }) => {
+  clearCart();
+  navigate('/myorder', { state: { order: data } })
+})
             .catch(err => {
               console.error('Payment confirmation error: ',err);
               setError('Payment Confirmation failed. Please contact support.')
